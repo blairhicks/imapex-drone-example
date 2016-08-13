@@ -3,3 +3,13 @@ build:
   commands:
   - echo "build commands"
   - npm install
+
+publish:
+  docker:
+    username: $$DOCKER_USERNAME
+    password: $$DOCKER_PASSWORD
+    email: aroach@gmail.com
+    repo: ciscodevnet/imapex-drone-nodejs
+    tag: latest
+    file: Dockerfile
+    insecure: false
