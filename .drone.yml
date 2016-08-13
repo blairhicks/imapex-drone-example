@@ -1,4 +1,5 @@
 build:
-  image: ciscodevnet/imapex-drone-nodejs:latest
+  image: node:5.11.1
   commands:
   - echo "build commands"
+  - npm install
