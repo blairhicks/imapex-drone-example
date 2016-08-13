@@ -3,6 +3,7 @@ build:
   commands:
   - echo "build commands"
   - npm install
+  - npm test
 
 publish:
   docker:
