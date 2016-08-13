@@ -1,6 +1,36 @@
-import env_make	
+#import env_make	
 
-.PHONY: run
+NS = ciscodevnet
+VERSION ?= latest
+
+REPO = imapex-drone-nodejs
+NAME = imapex-drone-nodejs
+INSTANCE = default	
+
+.PHONY: build push shell run start stop rm devrun test mongostart mongostop release
+
+build:
+	docker build -t $(NS)/$(REPO):$(VERSION) .
+
+push:
+	docker push $(NS)/$(REPO):$(VERSION)
+
+shell:
+	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION) /bin/bash
 
 run:
-	docker run --env DRONE_GITHUB=true --env DRONE_GITHUB_CLIENT=$(GITHUB_CLIENTID) --env DRONE_GITHUB_SECRET=$(GITHUB_CLIENTSECRET) --env DRONE_SECRET="ABC!@#" --env DRONE_OPEN=true  --env DRONE_ADMIN=aroach --volume /tmp/drone:/var/lib/drone --restart=always --publish=8089:8000 --detach=true --name=drone drone/drone:0.5
+	docker run --rm --name $(NAME)-$(INSTANCE) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION)
+
+start:
+	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION)
+
+stop:
+	docker stop $(NAME)-$(INSTANCE)
+
+rm:
+	docker rm $(NAME)-$(INSTANCE)
+
+release: build
+	make push -e VERSION=$(VERSION)
+
+default: build
