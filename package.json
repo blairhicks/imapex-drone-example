@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "password-generator": "^2.0.2"
+  },
+  "devDependencies": {
     "mocha": "^3.0.2"
   }
 }

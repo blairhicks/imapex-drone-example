@@ -1,4 +1,4 @@
-
+var generatePassword = require('password-generator');
 
 exports.setMessage = function(message) {
   return message;
@@ -7,4 +7,4 @@ exports.setMessage = function(message) {
 var myMessage = exports.setMessage("I'm HERE");
 
 
-console.log(myMessage);
+console.log(myMessage + " -- " + generatePassword());

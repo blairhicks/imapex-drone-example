@@ -5,8 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install app dependencies
-#COPY package.json /usr/src/app/
-#RUN npm install
+COPY node_modules /usr/src/app/
 
 # Bundle app source
 COPY ./app.js /usr/src/app/
